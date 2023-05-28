@@ -39,6 +39,9 @@ while True:
     # Generate the dummy words to push the unwanted part out of the context window
     dummy_words = " ".join(["dummy_word" for _ in range(remaining_tokens)])
 
+    # Calculate the total number of tokens for the initial input
+    initial_input_tokens = encoding.encode(initial_input + ' ' + dummy_words)
+
     # Craft the final prompt
     final_prompt = f"Write an engaging and interesting short story about the below [{initial_input + ' ' + dummy_words}]\n-------------------------Write an engaging and interesting short story about the above sentence. Write it in second person, and make sure to use good grammar and spelling."
 
@@ -58,7 +61,7 @@ while True:
     print("Remaining context window after GPT-3's response:", remaining_context_window)
 
     # Calculate how many tokens from the initial input are still within the context window
-    remaining_initial_input_tokens = remaining_context_window - len(static_second_prompt_tokens)
+    remaining_initial_input_tokens = remaining_context_window - len(initial_input_tokens)
     print("Remaining tokens from initial input in context window:", remaining_initial_input_tokens)
 
     # Suggest an initial prompt for the next iteration by adding dummy words to the remaining tokens of the initial input
