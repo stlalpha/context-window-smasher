@@ -1,6 +1,13 @@
-#Let's use LLM's to solve things like attacking LLMs, and other things
-This is a script to help with the hackaprompt challenge by instrumenting the context window to see if we can manipulate the context#window to get the LLM to say something it shouldn't say
-This was originally a response to problem 6 which is defined as follows:
+Let's use LLM's to solve things like attacking LLMs, and other things
+
+This is a script to help with the hackaprompt challenge by instrumenting the context window to see if we can manipulate the context window
+to get the LLM to say something it shouldn't say as part of this challenge:
+
+https://huggingface.co/spaces/jerpint-org/hackaprompt
+
+Its just generating text so I can dork around with the playground at the moment.
+
+This was originally a response to hackaprompt problem 6 which is defined as follows:
 
 
 **Title: LLM SELF-EVALUATION DEFENSE
