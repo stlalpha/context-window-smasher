@@ -12,6 +12,11 @@
 #So lets see if this works.  -jim/spaceman 5-27-2023
 
 import tiktoken
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--search", help="enable search mode to find maximum input length", action="store_true")
+args = parser.parse_args()
 
 encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
 
@@ -47,6 +52,13 @@ while True:
 
     # Print the final prompt
     print("Final prompt:", final_prompt)
+
+    # If in "search mode", we ask the user if the web app accepted the input.
+    if args.search:
+        accepted = input("Did the web app accept the input? (yes/no): ")
+        if accepted.lower() == "yes":
+            print("The web app accepted an input of length:", len(final_prompt))
+            break
 
     # Prompt for the challenge's combined prompt and the response from GPT-3
     combined_prompt = input("Please enter the challenge's combined prompt: ")
