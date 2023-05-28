@@ -48,7 +48,7 @@ while True:
     dummy_words = " ".join(["dummy_word" for _ in range(mid_point)])
 
     # Craft the final prompt
-    final_prompt = f"Write an engaging and interesting short story about the below [{initial_input + ' ' + dummy_words}]\n-------------------------Write an engaging and interesting short story about the above sentence. Write it in second person, and make sure to use good grammar and spelling."
+    final_prompt = f"Write an engaging and interesting short story about the below [sentence]. Write it in second person, and make sure to use good grammar and spelling: -------------------------[{initial_input + ' ' + dummy_words}]-------------------------Write an engaging and interesting short story about the above [sentence]. Write it in second person, and make sure to use good grammar and spelling."
 
     # Print the final prompt
     print("Final prompt:", final_prompt)
