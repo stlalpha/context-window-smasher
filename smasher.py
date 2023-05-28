@@ -11,7 +11,6 @@
 #
 #So lets see if this works.  -jim/spaceman 5-27-2023
 
-
 import tiktoken
 
 encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
@@ -53,6 +52,18 @@ while True:
     # Calculate and print the number of tokens in the GPT-3 response
     response_tokens = encoding.encode(gpt3_response)
     print("Number of tokens in GPT-3's response:", len(response_tokens))
+
+    # Calculate and print the remaining context window after GPT-3's response
+    remaining_context_window = 4096 - len(response_tokens)
+    print("Remaining context window after GPT-3's response:", remaining_context_window)
+
+    # Calculate how many tokens from the initial input are still within the context window
+    remaining_initial_input_tokens = remaining_context_window - len(static_second_prompt_tokens)
+    print("Remaining tokens from initial input in context window:", remaining_initial_input_tokens)
+
+    # Suggest an initial prompt for the next iteration by adding dummy words to the remaining tokens of the initial input
+    suggested_initial_prompt = initial_input + " " + " ".join(["dummy_word" for _ in range(remaining_initial_input_tokens)])
+    print("Suggested initial prompt for the next iteration:", suggested_initial_prompt)
 
     # Prompt for continuation
     cont = input("Do you want to continue? (yes/no): ")
