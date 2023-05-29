@@ -14,6 +14,11 @@
 import tiktoken
 import argparse
 import time
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # Create argument parser
 parser = argparse.ArgumentParser(description='Context window manipulation.')
@@ -26,30 +31,37 @@ args = parser.parse_args()
 
 encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
 
-def search_web_app_input_ceiling(min_length: int, max_length: int) -> int:
-    # Binary search method
-    while min_length < max_length:
-        mid_length = (min_length + max_length) // 2
-        input_length = mid_length * "a"
-        # This would be the code for submitting the input to the web app and checking if it was accepted
-        # For now, I'm simulating this with a sleep command
-        time.sleep(0.1)
-        if submit_input_to_web_app(input_length):
-            min_length = mid_length + 1
-        else:
-            max_length = mid_length
-    return min_length
+# Initialize Selenium
+options = Options()
+options.headless = False
+driver = webdriver.Firefox(options=options)
+
+# Navigate to the web app
+driver.get("https://huggingface.co/spaces/jerpint-org/hackaprompt")
+
+# Select the model and level
+# Select Level 6
+WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//input[@type="radio" and @name="radio-component-11" and @value="6"]'))).click()
+
 
 def submit_input_to_web_app(input: str) -> bool:
-    # This function should submit the input to the web app and return True if it was accepted, False otherwise
-    # For now, I'm just returning True
-    return True
+    try:
+        # Enter the prompt in the "Your Prompt:" input box
+        prompt_input = driver.find_element_by_xpath('/html/body/gradio-app/div/div/div/div/div/div[4]/div/label/textarea')
+        prompt_input.clear()
+        prompt_input.send_keys(input)
 
-if args.search_mode:
-    print("Searching for the maximum input length the web app can handle...")
-    max_input_length = search_web_app_input_ceiling(1, args.web_app_input_ceiling)
-    print("The web app can handle a maximum input length of:", max_input_length)
-    args.web_app_input_ceiling = max_input_length
+        # Click the "Evaluate" button
+        evaluate_button = driver.find_element_by_id('component-30')
+        evaluate_button.click()
+
+        # Wait for the "Model Completion" box to be filled
+        WebDriverWait(driver, 60).until(EC.text_to_be_present_in_element((By.XPATH, '/html/body/gradio-app/div/div/div/div/div/div[3]/div[2]/div[2]/div/div[2]/label/textarea'), ''))
+
+        return True
+    except Exception as e:
+        print(e)
+        return False
 
 # The static portion of the second prompt from the challenge
 static_second_prompt = """
@@ -81,9 +93,17 @@ while True:
     # Print the final prompt
     print("Final prompt:", final_prompt)
 
-    # Prompt for the challenge's combined prompt and the response from GPT-3
-    combined_prompt = input("Please enter the challenge's combined prompt: ")
-    gpt3_response = input("Please enter GPT-3's response: ")
+    # Submit the prompt using Selenium
+    if submit_input_to_web_app(final_prompt):
+        print("Prompt submitted successfully!")
+    else:
+        print("Failed to submit the prompt!")
+
+    # Wait for the "Model Completion" box to be filled
+    WebDriverWait(driver, 60).until(EC.text_to_be_present_in_element((By.XPATH, '/html/body/gradio-app/div/div/div/div/div/div[3]/div[2]/div[2]/div/div[2]/label/textarea'), ''))
+    
+    # Get GPT-3's response
+    gpt3_response = driver.find_element_by_xpath('/html/body/gradio-app/div/div/div/div/div/div[3]/div[2]/div[2]/div/div[2]/label/textarea').text
 
     # Calculate and print the number of tokens in the GPT-3 response
     response_tokens = encoding.encode(gpt3_response)

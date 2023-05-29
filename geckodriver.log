@@ -1,0 +1,121 @@
+1685378139071	geckodriver	INFO	Listening on 127.0.0.1:55506
+1685378139588	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/xc/p8p3653n4zz6hrvkbr3_z5zm0000gn/T/rust_mozprofilesHccQZ"
+1685378140214	Marionette	INFO	Marionette enabled
+2023-05-29 11:35:40.412 plugin-container[4587:29047] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:35:40.412 plugin-container[4587:29047] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2023-05-29 11:35:40.417 plugin-container[4587:29047] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:35:40.417 plugin-container[4587:29047] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2023-05-29 11:35:40.418 plugin-container[4587:29049] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:35:40.418 plugin-container[4587:29049] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1685378140435	Marionette	INFO	Listening on port 55527
+Read port: 55527
+WebDriver BiDi listening on ws://127.0.0.1:55507
+1685378140611	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/xc/p8p3653n4zz6hrvkbr3_z5zm0000gn/T/rust_mozprofilesHccQZ/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:55507/devtools/browser/a5e4ab7e-9458-43a1-9a9a-9eb0e60042dd
+console.error: (new TypeError("lazy.AsyncShutdown.profileBeforeChange is undefined", "resource://services-settings/Database.jsm", 510))
+1685378332912	geckodriver	INFO	Listening on 127.0.0.1:56568
+1685378333424	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/xc/p8p3653n4zz6hrvkbr3_z5zm0000gn/T/rust_mozprofileqlpZH1"
+1685378333836	Marionette	INFO	Marionette enabled
+1685378333909	Marionette	INFO	Listening on port 56581
+Read port: 56581
+2023-05-29 11:38:53.953 plugin-container[4755:31235] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:38:53.954 plugin-container[4755:31235] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2023-05-29 11:38:53.958 plugin-container[4755:31235] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:38:53.958 plugin-container[4755:31235] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2023-05-29 11:38:53.958 plugin-container[4755:31243] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:38:53.958 plugin-container[4755:31243] nil host used in call to allowsAnyHTTPSCertificateForHost:
+WebDriver BiDi listening on ws://127.0.0.1:56569
+1685378334032	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/xc/p8p3653n4zz6hrvkbr3_z5zm0000gn/T/rust_mozprofileqlpZH1/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:56569/devtools/browser/6c2d8450-3889-4caf-8ee8-40876b7f71d9
+[GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
+[GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
+1685378729418	geckodriver	INFO	Listening on 127.0.0.1:58720
+1685378729924	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/xc/p8p3653n4zz6hrvkbr3_z5zm0000gn/T/rust_mozprofileXcA5IM"
+1685378730333	Marionette	INFO	Marionette enabled
+2023-05-29 11:45:30.437 plugin-container[5020:36131] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:45:30.437 plugin-container[5020:36131] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2023-05-29 11:45:30.440 plugin-container[5020:36131] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:45:30.440 plugin-container[5020:36131] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2023-05-29 11:45:30.440 plugin-container[5020:36126] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:45:30.440 plugin-container[5020:36126] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1685378730493	Marionette	INFO	Listening on port 58739
+Read port: 58739
+WebDriver BiDi listening on ws://127.0.0.1:58721
+1685378730607	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/xc/p8p3653n4zz6hrvkbr3_z5zm0000gn/T/rust_mozprofileXcA5IM/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:58721/devtools/browser/bccb9b7b-878d-4639-b9bc-d01484ba4117
+1685378959429	geckodriver	INFO	Listening on 127.0.0.1:59973
+1685378959940	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/xc/p8p3653n4zz6hrvkbr3_z5zm0000gn/T/rust_mozprofileTqyig1"
+1685378960371	Marionette	INFO	Marionette enabled
+2023-05-29 11:49:20.490 plugin-container[5227:38833] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:49:20.490 plugin-container[5227:38833] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2023-05-29 11:49:20.496 plugin-container[5227:38833] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:49:20.496 plugin-container[5227:38833] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2023-05-29 11:49:20.496 plugin-container[5227:38836] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:49:20.496 plugin-container[5227:38836] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1685378960542	Marionette	INFO	Listening on port 59987
+Read port: 59987
+WebDriver BiDi listening on ws://127.0.0.1:59974
+1685378960649	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/xc/p8p3653n4zz6hrvkbr3_z5zm0000gn/T/rust_mozprofileTqyig1/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:59974/devtools/browser/5c48326a-b495-475d-9704-00d2527cc02b
+1685379087519	geckodriver	INFO	Listening on 127.0.0.1:60702
+1685379088028	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/xc/p8p3653n4zz6hrvkbr3_z5zm0000gn/T/rust_mozprofileU99eaa"
+1685379088438	Marionette	INFO	Marionette enabled
+1685379088513	Marionette	INFO	Listening on port 60715
+Read port: 60715
+2023-05-29 11:51:28.554 plugin-container[5400:40810] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:51:28.554 plugin-container[5400:40810] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2023-05-29 11:51:28.559 plugin-container[5400:40810] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:51:28.559 plugin-container[5400:40810] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2023-05-29 11:51:28.559 plugin-container[5400:40815] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:51:28.559 plugin-container[5400:40815] nil host used in call to allowsAnyHTTPSCertificateForHost:
+WebDriver BiDi listening on ws://127.0.0.1:60703
+1685379088622	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/xc/p8p3653n4zz6hrvkbr3_z5zm0000gn/T/rust_mozprofileU99eaa/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:60703/devtools/browser/d0eb8a7c-f630-415b-9ed0-4f9058a54d43
+[GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
+1685379197558	geckodriver	INFO	Listening on 127.0.0.1:61340
+1685379198077	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/xc/p8p3653n4zz6hrvkbr3_z5zm0000gn/T/rust_mozprofileqdm0FJ"
+1685379198511	Marionette	INFO	Marionette enabled
+1685379198588	Marionette	INFO	Listening on port 61353
+Read port: 61353
+2023-05-29 11:53:18.624 plugin-container[5632:42881] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:53:18.624 plugin-container[5632:42881] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2023-05-29 11:53:18.627 plugin-container[5632:42881] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:53:18.627 plugin-container[5632:42881] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2023-05-29 11:53:18.627 plugin-container[5632:42884] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:53:18.628 plugin-container[5632:42884] nil host used in call to allowsAnyHTTPSCertificateForHost:
+WebDriver BiDi listening on ws://127.0.0.1:61341
+1685379198690	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/xc/p8p3653n4zz6hrvkbr3_z5zm0000gn/T/rust_mozprofileqdm0FJ/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:61341/devtools/browser/eff99c27-767d-458f-898a-dbf46c660777
+[GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
+1685379429872	geckodriver	INFO	Listening on 127.0.0.1:62626
+1685379430383	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/App ... s" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/xc/p8p3653n4zz6hrvkbr3_z5zm0000gn/T/rust_mozprofile2giGbX"
+1685379430818	Marionette	INFO	Marionette enabled
+1685379430893	Marionette	INFO	Listening on port 62640
+Read port: 62640
+2023-05-29 11:57:10.937 plugin-container[5960:46480] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:57:10.937 plugin-container[5960:46480] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2023-05-29 11:57:10.941 plugin-container[5960:46480] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:57:10.941 plugin-container[5960:46480] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2023-05-29 11:57:10.942 plugin-container[5960:46483] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2023-05-29 11:57:10.942 plugin-container[5960:46483] nil host used in call to allowsAnyHTTPSCertificateForHost:
+WebDriver BiDi listening on ws://127.0.0.1:62627
+1685379431013	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/xc/p8p3653n4zz6hrvkbr3_z5zm0000gn/T/rust_mozprofile2giGbX/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:62627/devtools/browser/00b8d312-056e-4a2e-9006-63dd0c565c25
+[GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
+[GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
+[GFX1-]: Unrecognized feature ACCELERATED_CANVAS2D
+1685380671450	Marionette	INFO	Stopped listening on port 55527
+1685380677232	Marionette	INFO	Stopped listening on port 56581
+1685380679961	Marionette	INFO	Stopped listening on port 58739
+console.error: (new TypeError("lazy.AsyncShutdown.profileBeforeChange is undefined", "resource://services-settings/Database.jsm", 510))
+1685380683034	Marionette	INFO	Stopped listening on port 59987
+1685380684932	Marionette	INFO	Stopped listening on port 61353
+1685380686173	Marionette	INFO	Stopped listening on port 62640
+1685380687286	Marionette	INFO	Stopped listening on port 60715
