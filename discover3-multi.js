@@ -138,17 +138,20 @@ async function scrollPageToEnd(page) {
 }
 
 // Function to discover input fields in the page
-async function discoverInputFieldsInSingleFrame(frame, logStatus) {
-  const inputFields = await frame.$$('input, textarea');
+async function discoverInputFields(page, logStatus) {
+  const frameHierarchy = page.mainFrame().childFrames();
   const inputFieldsData = [];
 
-  for (const inputField of inputFields) {
-    const type = await frame.evaluate((node) => node.getAttribute('type'), inputField);
-    const name = await frame.evaluate((node) => node.getAttribute('name'), inputField);
-    const value = await frame.evaluate((node) => node.getAttribute('value'), inputField);
-    const xpath = await frame.evaluate(getElementXPath, inputField);
-
-    inputFieldsData.push({ type, name, value, xpath });
+  if (frameHierarchy.length === 0) {
+    logStatus('No frames detected. Discovering input fields in the main frame.');
+    const inputFields = await discoverInputFieldsInSingleFrame(page, logStatus);
+    inputFieldsData.push(...inputFields);
+  } else {
+    for (const frame of frameHierarchy) {
+      logStatus(`Discovering input fields in frame: ${frame.url()}`);
+      const frameInputFields = await discoverInputFieldsInSingleFrame(frame, logStatus);
+      inputFieldsData.push(...frameInputFields);
+    }
   }
 
   return inputFieldsData;
@@ -156,20 +159,54 @@ async function discoverInputFieldsInSingleFrame(frame, logStatus) {
 
 // Function to discover input fields in a single frame
 async function discoverInputFieldsInSingleFrame(frame, logStatus) {
-  const inputFields = await frame.$$('input');
-  const inputFieldsData = [];
-
-  for (const inputField of inputFields) {
-    const type = await frame.evaluate((node) => node.getAttribute('type'), inputField);
-    const name = await frame.evaluate((node) => node.getAttribute('name'), inputField);
-    const value = await frame.evaluate((node) => node.getAttribute('value'), inputField);
-    const xpath = await frame.evaluate(getElementXPath, inputField);
-
-    inputFieldsData.push({ type, name, value, xpath });
+    const inputFields = await frame.$$('input');
+    const textareas = await frame.$$('textarea');
+    const inputFieldsData = [];
+  
+    for (const inputField of inputFields) {
+      const type = await frame.evaluate((node) => node.getAttribute('type'), inputField);
+      const name = await frame.evaluate((node) => node.getAttribute('name'), inputField);
+      const value = await frame.evaluate((node) => node.getAttribute('value'), inputField);
+      const xpath = await frame.evaluate(getElementXPath, inputField);
+      const inferredLabel = await getInferredLabel(frame, inputField);
+  
+      inputFieldsData.push({ type, name, value, xpath, inferredLabel });
+    }
+  
+    for (const textarea of textareas) {
+      const type = 'textarea';
+      const name = await frame.evaluate((node) => node.getAttribute('name'), textarea);
+      const value = await frame.evaluate((node) => node.getAttribute('value'), textarea);
+      const xpath = await frame.evaluate(getElementXPath, textarea);
+      const inferredLabel = await getInferredLabel(frame, textarea);
+  
+      inputFieldsData.push({ type, name, value, xpath, inferredLabel });
+    }
+  
+    return inputFieldsData;
   }
-
-  return inputFieldsData;
-}
+  
+  // Function to retrieve the inferred label for an input field
+  async function getInferredLabel(frame, inputField) {
+    const labelElement = await frame.evaluateHandle((input) => {
+      let label = input.closest('label');
+      if (!label) {
+        const id = input.getAttribute('id');
+        if (id) {
+          label = document.querySelector(`label[for="${id}"]`);
+        }
+      }
+      return label;
+    }, inputField);
+  
+    if (labelElement) {
+      const labelText = await frame.evaluate((label) => label.innerText, labelElement);
+      return labelText.trim();
+    }
+  
+    return null;
+  }
+  
 
 // Function to retrieve the XPath of an element
 function getElementXPath(element) {
