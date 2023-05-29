@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 
 (async () => {
   const url = process.argv[2];
+  const showInteractiveOnly = process.argv.includes('--interactive-only');
 
   // Launch the browser in headless mode
   const browser = await puppeteer.launch({ headless: true });
@@ -42,7 +43,7 @@ const puppeteer = require('puppeteer');
     logStatus('Input field discovery complete.');
 
     logStatus('Input field data:');
-    console.log(inputFieldsData);
+    console.log(showInteractiveOnly ? inputFieldsData.filter(item => item.isInteractive) : inputFieldsData);
   } catch (error) {
     console.log('[Error]:', error);
   } finally {
@@ -159,54 +160,36 @@ async function discoverInputFields(page, logStatus) {
 
 // Function to discover input fields in a single frame
 async function discoverInputFieldsInSingleFrame(frame, logStatus) {
-    const inputFields = await frame.$$('input');
-    const textareas = await frame.$$('textarea');
-    const inputFieldsData = [];
-  
-    for (const inputField of inputFields) {
-      const type = await frame.evaluate((node) => node.getAttribute('type'), inputField);
-      const name = await frame.evaluate((node) => node.getAttribute('name'), inputField);
-      const value = await frame.evaluate((node) => node.getAttribute('value'), inputField);
-      const xpath = await frame.evaluate(getElementXPath, inputField);
-      const inferredLabel = await getInferredLabel(frame, inputField);
-  
-      inputFieldsData.push({ type, name, value, xpath, inferredLabel });
-    }
-  
-    for (const textarea of textareas) {
-      const type = 'textarea';
-      const name = await frame.evaluate((node) => node.getAttribute('name'), textarea);
-      const value = await frame.evaluate((node) => node.getAttribute('value'), textarea);
-      const xpath = await frame.evaluate(getElementXPath, textarea);
-      const inferredLabel = await getInferredLabel(frame, textarea);
-  
-      inputFieldsData.push({ type, name, value, xpath, inferredLabel });
-    }
-  
-    return inputFieldsData;
+  const inputFields = await frame.$$('input');
+  const textareas = await frame.$$('textarea');
+  const inputFieldsData = [];
+
+  for (const inputField of inputFields) {
+    const type = await frame.evaluate((node) => node.getAttribute('type'), inputField);
+    const name = await frame.evaluate((node) => node.getAttribute('name'), inputField);
+    const value = await frame.evaluate((node) => node.getAttribute('value'), inputField);
+    const xpath = await frame.evaluate(getElementXPath, inputField);
+    const { inferredLabel, inferredSection } = await getInferredLabelAndSection(frame, inputField);
+
+    const isInteractive = !(await frame.evaluate((node) => node.disabled, inputField));
+
+    inputFieldsData.push({ type, name, value, xpath, inferredLabel, inferredSection, isInteractive });
   }
-  
-  // Function to retrieve the inferred label for an input field
-  async function getInferredLabel(frame, inputField) {
-    const labelElement = await frame.evaluateHandle((input) => {
-      let label = input.closest('label');
-      if (!label) {
-        const id = input.getAttribute('id');
-        if (id) {
-          label = document.querySelector(`label[for="${id}"]`);
-        }
-      }
-      return label;
-    }, inputField);
-  
-    if (labelElement) {
-      const labelText = await frame.evaluate((label) => label.innerText, labelElement);
-      return labelText.trim();
-    }
-  
-    return null;
+
+  for (const textarea of textareas) {
+    const type = 'textarea';
+    const name = await frame.evaluate((node) => node.getAttribute('name'), textarea);
+    const value = await frame.evaluate((node) => node.getAttribute('value'), textarea);
+    const xpath = await frame.evaluate(getElementXPath, textarea);
+    const { inferredLabel, inferredSection } = await getInferredLabelAndSection(frame, textarea);
+
+    const isInteractive = !(await frame.evaluate((node) => node.disabled, textarea));
+
+    inputFieldsData.push({ type, name, value, xpath, inferredLabel, inferredSection, isInteractive });
   }
-  
+
+  return inputFieldsData;
+}
 
 // Function to retrieve the XPath of an element
 function getElementXPath(element) {
@@ -216,3 +199,54 @@ function getElementXPath(element) {
     !elm || elm.nodeType !== 1 ? [''] : [...segs(elm.parentNode), `${elm.localName.toLowerCase()}[${idx(elm)}]`];
   return segs(element).join('/');
 }
+
+// Function to retrieve the inferred label and inferred section for an input field
+async function getInferredLabelAndSection(frame, inputField) {
+  const labelElement = await frame.evaluateHandle((input) => {
+    let label = input.closest('label');
+    if (!label) {
+      const id = input.getAttribute('id');
+      if (id) {
+        label = document.querySelector(`label[for="${id}"]`);
+      }
+    }
+    return label;
+  }, inputField);
+
+  const inferredLabel = await getInnerText(frame, labelElement);
+  const inferredSection = await getInferredSection(frame, inputField);
+
+  return { inferredLabel, inferredSection };
+}
+
+// Function to retrieve the inner text of an element
+async function getInnerText(frame, elementHandle) {
+  if (elementHandle) {
+    const innerText = await frame.evaluate((elem) => elem.innerText, elementHandle).catch(() => null);
+    return innerText ? innerText.trim() : null;
+  }
+
+  return null;
+}
+
+async function getInferredSection(frame, inputField) {
+    const sectionElement = await frame.evaluateHandle((input) => {
+      let currentElement = input.parentElement;
+  
+      while (currentElement) {
+        if (currentElement.tagName.toLowerCase() === 'div') {
+          const section = currentElement.closest('section');
+          if (section) {
+            return section;
+          }
+        }
+        currentElement = currentElement.parentElement;
+      }
+  
+      return null;
+    }, inputField);
+  
+    const inferredSection = await getInnerText(frame, sectionElement);
+    return inferredSection;
+  }
+  
