@@ -138,20 +138,17 @@ async function scrollPageToEnd(page) {
 }
 
 // Function to discover input fields in the page
-async function discoverInputFields(page, logStatus) {
-  const frameHierarchy = page.mainFrame().childFrames();
+async function discoverInputFieldsInSingleFrame(frame, logStatus) {
+  const inputFields = await frame.$$('input, textarea');
   const inputFieldsData = [];
 
-  if (frameHierarchy.length === 0) {
-    logStatus('No frames detected. Discovering input fields in the main frame.');
-    const inputFields = await discoverInputFieldsInSingleFrame(page, logStatus);
-    inputFieldsData.push(...inputFields);
-  } else {
-    for (const frame of frameHierarchy) {
-      logStatus(`Discovering input fields in frame: ${frame.url()}`);
-      const frameInputFields = await discoverInputFieldsInSingleFrame(frame, logStatus);
-      inputFieldsData.push(...frameInputFields);
-    }
+  for (const inputField of inputFields) {
+    const type = await frame.evaluate((node) => node.getAttribute('type'), inputField);
+    const name = await frame.evaluate((node) => node.getAttribute('name'), inputField);
+    const value = await frame.evaluate((node) => node.getAttribute('value'), inputField);
+    const xpath = await frame.evaluate(getElementXPath, inputField);
+
+    inputFieldsData.push({ type, name, value, xpath });
   }
 
   return inputFieldsData;
